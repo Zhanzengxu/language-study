@@ -147,14 +147,26 @@ export const useStore = create<AppState>((set, get) => ({
   },
 
   register: async (email, password, username) => {
+    console.log('Registering user:', email, username);
     const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase register error:', error);
+      throw error;
+    }
+    console.log('Supabase register data:', data);
     if (data.user) {
-      await supabase.from('users').insert({
-        id: data.user.id,
-        email,
-        username,
-      });
+      try {
+        console.log('Inserting user record...');
+        await supabase.from('users').insert({
+          id: data.user.id,
+          email,
+          username,
+        });
+        console.log('User record inserted');
+      } catch (dbError: any) {
+        console.error('Database insert error:', dbError);
+        // 即使数据库插入失败，也认为注册成功，因为认证已经完成
+      }
       set({
         user: { id: data.user.id, email, username },
         isAuthenticated: true,

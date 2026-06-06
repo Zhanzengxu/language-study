@@ -28,7 +28,15 @@ export default function Register() {
       await register(email, password, username);
       navigate('/');
     } catch (err: any) {
-      setError(err.message || 'Failed to register');
+      console.error('Register error:', err);
+      let errorMessage = 'Failed to register';
+      if (err.message) {
+        errorMessage = err.message;
+      }
+      if (err.error_description) {
+        errorMessage = err.error_description;
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
