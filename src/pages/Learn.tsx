@@ -265,7 +265,8 @@ export default function Learn() {
         )}
       </div>
 
-      <style jsx>{`
+      {/* Custom styles for 3D card effects */}
+      <style>{`
         .perspective-1000 {
           perspective: 1000px;
         }
