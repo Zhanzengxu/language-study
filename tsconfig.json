@@ -23,7 +23,8 @@
     /* Path mapping */
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["node", "express"]
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "api", "vite.config.ts"]
 }

@@ -265,8 +265,7 @@ export default function Learn() {
         )}
       </div>
 
-      {/* Custom styles for 3D card effects */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .perspective-1000 {
           perspective: 1000px;
         }
@@ -279,7 +278,7 @@ export default function Learn() {
         .rotate-y-180 {
           transform: rotateY(180deg);
         }
-      `}</style>
+      ` }} />
     </div>
   );
 }
